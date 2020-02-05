@@ -27,7 +27,11 @@ for tc in range(T):
         tot2 = 0
         for kk in range(100):
             tot += arr[jj][kk]
+<<<<<<< HEAD
             if jj == kk:
+=======
+            if jj + kk == 99 :
+>>>>>>> origin/master
                 tot2 += arr[jj][kk]
         sum_list.append(tot)
     sum_list.append(tot2)
