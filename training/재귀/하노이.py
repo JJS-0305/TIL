@@ -9,7 +9,6 @@ def hanoi(n,start,waypoint,destination):
     memo.append([start,destination])
     hanoi(n-1,waypoint,start,destination)
 
-
 N = int(input())
 cnt = 0
 memo = []
