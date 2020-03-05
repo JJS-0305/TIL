@@ -1,4 +1,4 @@
-def comb(n,k):
+def comb(n,k,st):
     global my_min
     if k == n/2:
         sum1 = 0
@@ -21,10 +21,10 @@ def comb(n,k):
             my_min = ans
         return
     else:
-        for i in range(k,N):
+        for i in range(st,N):
             if visited[i] == 0:
                 visited[i] = 1
-                comb(n,k+1)
+                comb(n,k+1,i+1)
                 visited[i] = 0
 
 T = int(input())
@@ -35,5 +35,5 @@ for tc in range(1,T+1):
     visited = [0] * N
 
     my_min = 987654321
-    comb(N,0)
+    comb(N,0,0)
     print("#{} {}".format(tc,my_min))
