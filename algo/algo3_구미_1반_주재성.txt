@@ -1,0 +1,42 @@
+﻿1. 배열 A에서 숫자가 2인 행,열을 찾는다.
+    for row in range(N):
+        for col in range(N):
+            if A[row][col] == 2:
+                ans = bfs(row,col)
+
+2. 상하좌우 4방향 탐색을 통해 숫자가 0 혹은 2인 경우 1칸씩
+    이동(왔던 곳 되돌아오지 못함)하여 가장 빠르게 갈 수 있는 다른 출발지를 찾는다.
+
+def bfs(row,col):
+    Queue 생성
+    Queue.append((row,col))
+    visited = [[-1 for _ in range(N)] for _ in range(N)]    # -1 값으로 visited 리스트 초기화
+    visited[row][col] = 0
+    drow = [1, -1, 0, 0]
+    dcol = [0, 0, 1, -1]
+
+
+    while Queue:
+        row, col = Queue.popleft()
+        for i in range(4):
+            test_r = row + drow[i]
+            test_c = col + dcol[i]
+            if iswall(test_r, test_c):  # 방 외곽으로 나가거나 들어갈 수 없는 방이면 False 리턴하는 함수
+                if visited[test_r][test_c] == -1:
+                    visited[test_r][test_c] = visited[row][col] + 1 # visited 리스트를 통해 방문여부와 출발지에서 걸린 이동시간 체크
+                    Queue.append((test_r,test_c))
+
+3. 가장 빨리 도착한 곳 까지 걸리는 시간이 짝수이면 // 2 반환
+   가장 빨리 도착한 곳 까지 걸리는 시간이 홀수이면 // 2 + 1 반환
+        if A[row][col] == 2:
+            ans = visited[row][col]
+            if ans % 2:
+                return ans // 2 + 1
+            return ans // 2
+
+4. 반환한 ans 값 중 최소값을 출력
+    mn = N ** 2
+    if ans < mn:
+        mn = ans
+
+    print(mn)
